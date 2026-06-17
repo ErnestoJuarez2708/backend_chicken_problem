@@ -1,195 +1,280 @@
-# Guía para la presentación de propuesta de proyecto
+# Propuesta de Proyecto
 
-## 1. Nombre del proyecto
+# 1. Nombre del proyecto
 
-El equipo debe definir un nombre claro para su sistema.
+**DondeEstaMiPolloAPI**
 
-**Ejemplo:**
-Sistema de gestión de productos para un almacén.
-
----
-
-## 2. Descripción general del proyecto
-
-Explicar brevemente qué problema resuelve el sistema y para quién está dirigido.
-
-**Preguntas guía:**
-
-* ¿Qué problema intenta resolver?
-* ¿Quiénes usarán el sistema?
-* ¿Por qué sería útil este proyecto?
-* ¿Qué tipo de información manejará?
-
-**Ejemplo:**
-El proyecto consiste en una API REST para gestionar productos, categorías, usuarios y pedidos de un almacén. El sistema permitirá registrar productos, controlar stock y consultar información de ventas.
+Sistema de monitoreo y consulta de disponibilidad de pollo en puntos de venta fijos y móviles.
 
 ---
 
-## 3. Objetivo general
+# 2. Descripción general del proyecto
 
-Describir qué se quiere lograr con el proyecto.
+DondeEstaMiPolloAPI es una API REST diseñada para ayudar a los ciudadanos de La Paz a encontrar puntos de venta de pollo disponibles durante periodos de escasez o alta demanda. Actualmente, muchas personas desconocen dónde existe disponibilidad de pollo, cuáles son los precios vigentes o dónde se encuentran las unidades móviles de distribución de instituciones como EMAPA.
 
-**Ejemplo:**
-Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita administrar los productos, usuarios y pedidos de un almacén.
+El sistema permitirá registrar y consultar puntos de venta fijos y móviles, mostrando información actualizada sobre stock disponible, precio por kilogramo, ubicación geográfica y fecha de actualización. Además, los usuarios podrán localizar los puntos de venta más cercanos mediante servicios de geolocalización.
 
----
-
-## 4. Usuarios o roles del sistema
-
-Identificar quiénes interactuarán con el sistema.
-
-**Ejemplos de roles:**
-
-* Administrador
-* Cliente
-* Vendedor
-* Encargado de almacén
-* Usuario invitado
-
-Cada rol debe tener funcionalidades específicas.
+La plataforma estará dirigida a consumidores, vendedores y administradores, proporcionando una fuente centralizada de información para mejorar el acceso a productos avícolas y reducir desplazamientos innecesarios.
 
 ---
 
-## 5. Historias de usuario
+# 3. Objetivo general
 
-El equipo debe presentar al menos **10 historias de usuario** que representen las funcionalidades principales del sistema.
-
-Formato sugerido:
-
-> Como [tipo de usuario], quiero [acción o funcionalidad], para [beneficio o propósito].
-
-**Ejemplos:**
-
-1. Como administrador, quiero registrar nuevos productos, para mantener actualizado el inventario.
-2. Como administrador, quiero editar la información de un producto, para corregir datos o actualizar precios.
-3. Como administrador, quiero eliminar productos, para retirar productos que ya no se venden.
-4. Como cliente, quiero ver la lista de productos disponibles, para elegir qué comprar.
-5. Como cliente, quiero buscar productos por nombre, para encontrar rápidamente lo que necesito.
-6. Como cliente, quiero agregar productos a un carrito, para preparar una compra.
-7. Como cliente, quiero realizar un pedido, para comprar los productos seleccionados.
-8. Como administrador, quiero ver todos los pedidos realizados, para gestionar las ventas.
-9. Como usuario, quiero iniciar sesión, para acceder a funciones protegidas.
-10. Como administrador, quiero ver el stock disponible, para saber qué productos necesitan reposición.
+Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita gestionar puntos de venta de pollo, inventarios, usuarios y ubicaciones, proporcionando información actualizada sobre disponibilidad, precios y localización de puntos de venta fijos y móviles.
 
 ---
 
-## 6. Funcionalidades principales del proyecto
+# 4. Usuarios o roles del sistema
 
-Después de escribir las historias de usuario, el equipo debe convertirlas en funcionalidades concretas del sistema.
+## Administrador
 
-**Ejemplo:**
+* Gestionar usuarios.
+* Aprobar puntos de venta.
+* Eliminar reportes falsos.
+* Consultar estadísticas del sistema.
+* Gestionar inventarios globales.
 
-| Historia de usuario                            | Funcionalidad    |
-| ---------------------------------------------- | ---------------- |
-| Como administrador, quiero registrar productos | Crear producto   |
-| Como cliente, quiero ver productos disponibles | Listar productos |
-| Como usuario, quiero iniciar sesión            | Login de usuario |
+## Vendedor
+
+* Registrar puntos de venta.
+* Actualizar stock disponible.
+* Actualizar precios.
+* Gestionar ubicaciones de puntos móviles.
+* Marcar productos como agotados.
+
+## Consumidor
+
+* Consultar disponibilidad de pollo.
+* Buscar puntos de venta cercanos.
+* Filtrar resultados por precio.
+* Reportar información incorrecta.
+* Consultar historial de precios.
 
 ---
 
-## 7. Modelo de datos inicial
+# 5. Historias de usuario
 
-El equipo debe identificar las entidades principales que tendrá su base de datos.
+1. Como consumidor, quiero consultar los puntos de venta disponibles para encontrar pollo cerca de mi ubicación.
 
-**Ejemplo para un sistema de almacén:**
+2. Como consumidor, quiero visualizar el precio por kilogramo para comparar opciones de compra.
 
-### Producto
+3. Como consumidor, quiero conocer la cantidad disponible de pollo para evitar desplazamientos innecesarios.
 
-* nombre
-* descripción
-* precio
-* stock
-* categoría
-* imagen
-* estado
+4. Como consumidor, quiero buscar puntos de venta cercanos a mi ubicación para reducir el tiempo de traslado.
 
-### Usuario
+5. Como consumidor, quiero reportar información incorrecta para mejorar la calidad de los datos publicados.
+
+6. Como vendedor, quiero registrar un nuevo punto de venta para ofrecer información sobre mi disponibilidad.
+
+7. Como vendedor, quiero actualizar el stock disponible para mantener la información actualizada.
+
+8. Como vendedor, quiero actualizar el precio del producto para reflejar cambios en el mercado.
+
+9. Como administrador, quiero aprobar nuevos puntos de venta para garantizar información confiable.
+
+10. Como administrador, quiero visualizar estadísticas de precios y disponibilidad para analizar el comportamiento del mercado.
+
+---
+
+# 6. Funcionalidades principales del proyecto
+
+| Historia de usuario             | Funcionalidad             |
+| ------------------------------- | ------------------------- |
+| Consultar puntos de venta       | Listar puntos de venta    |
+| Visualizar precios              | Consulta de precios       |
+| Consultar stock disponible      | Gestión de inventario     |
+| Buscar puntos cercanos          | Geolocalización           |
+| Reportar información incorrecta | Sistema de reportes       |
+| Registrar punto de venta        | Crear punto de venta      |
+| Actualizar stock                | Modificar inventario      |
+| Actualizar precio               | Modificar precio          |
+| Aprobar puntos de venta         | Moderación administrativa |
+| Ver estadísticas                | Módulo de analítica       |
+
+---
+
+# 7. Modelo de datos inicial
+
+## Usuario
 
 * nombre
 * correo
 * contraseña
 * rol
+* estado
+* fechaCreacion
 
-### Pedido
+## PuntoVenta
+
+* nombre
+* tipo (FIJO / MOVIL)
+* dirección
+* latitud
+* longitud
+* estado
+* propietario
+
+## Inventario
+
+* puntoVenta
+* cantidadDisponibleKg
+* precioPorKg
+* estado
+* fechaActualizacion
+
+## Reporte
 
 * usuario
-* productos
-* total
+* puntoVenta
+* motivo
+* descripción
+* fechaReporte
 * estado
-* fecha
+
+## HistorialPrecio
+
+* puntoVenta
+* precioAnterior
+* precioNuevo
+* fechaCambio
 
 ---
 
-## 8. Endpoints tentativos de la API
+# 8. Endpoints tentativos de la API
 
-El equipo debe proponer algunos endpoints iniciales.
+## Autenticación
 
-**Ejemplo:**
+| Método | Endpoint           | Descripción       |
+| ------ | ------------------ | ----------------- |
+| POST   | /api/auth/register | Registrar usuario |
+| POST   | /api/auth/login    | Iniciar sesión    |
 
-| Método | Endpoint               | Descripción               |
-| ------ | ---------------------- | ------------------------- |
-| GET    | /api/products          | Listar productos          |
-| GET    | /api/products/:id      | Obtener un producto       |
-| POST   | /api/products          | Crear producto            |
-| PUT    | /api/products/:id      | Actualizar producto       |
-| DELETE | /api/products/:id      | Eliminar producto         |
-| POST   | /api/auth/register     | Registrar usuario         |
-| POST   | /api/auth/login        | Iniciar sesión            |
-| POST   | /api/orders            | Crear pedido              |
-| GET    | /api/orders            | Listar pedidos            |
-| PATCH  | /api/orders/:id/status | Cambiar estado del pedido |
+## Usuarios
+
+| Método | Endpoint       | Descripción        |
+| ------ | -------------- | ------------------ |
+| GET    | /api/users     | Listar usuarios    |
+| GET    | /api/users/:id | Obtener usuario    |
+| PATCH  | /api/users/:id | Actualizar usuario |
+
+## Puntos de Venta
+
+| Método | Endpoint              | Descripción               |
+| ------ | --------------------- | ------------------------- |
+| GET    | /api/sales-points     | Listar puntos de venta    |
+| GET    | /api/sales-points/:id | Obtener punto de venta    |
+| POST   | /api/sales-points     | Crear punto de venta      |
+| PUT    | /api/sales-points/:id | Actualizar punto de venta |
+| DELETE | /api/sales-points/:id | Eliminar punto de venta   |
+
+## Inventario
+
+| Método | Endpoint                 | Descripción              |
+| ------ | ------------------------ | ------------------------ |
+| GET    | /api/inventory           | Listar inventarios       |
+| GET    | /api/inventory/available | Consultar disponibilidad |
+| GET    | /api/inventory/nearby    | Buscar puntos cercanos   |
+| POST   | /api/inventory           | Registrar inventario     |
+| PATCH  | /api/inventory/:id       | Actualizar inventario    |
+
+## Reportes
+
+| Método | Endpoint     | Descripción     |
+| ------ | ------------ | --------------- |
+| POST   | /api/reports | Crear reporte   |
+| GET    | /api/reports | Listar reportes |
+
+## Estadísticas
+
+| Método | Endpoint                     | Descripción                    |
+| ------ | ---------------------------- | ------------------------------ |
+| GET    | /api/statistics/prices       | Estadísticas de precios        |
+| GET    | /api/statistics/availability | Estadísticas de disponibilidad |
 
 ---
 
-## 9. Reglas de negocio
+# 9. Reglas de negocio
 
-El equipo debe definir condiciones importantes del sistema.
-
-**Ejemplos:**
-
-* No se puede crear un producto sin nombre, precio y stock.
-* El precio de un producto no puede ser negativo.
-* El stock no puede ser menor a cero.
-* Solo un administrador puede crear, editar o eliminar productos.
-* Un usuario debe iniciar sesión para realizar un pedido.
-* No se puede hacer un pedido si no hay stock suficiente.
+* No se puede registrar un punto de venta sin nombre y ubicación.
+* El precio del pollo no puede ser menor o igual a cero.
+* El stock disponible no puede ser negativo.
+* Solo los vendedores pueden actualizar inventarios.
+* Solo los administradores pueden aprobar puntos de venta.
+* Solo los usuarios autenticados pueden generar reportes.
+* No se puede registrar un inventario sin asociarlo a un punto de venta.
+* Los puntos de venta móviles deben registrar una ubicación válida.
+* El historial de precios debe almacenarse cada vez que se modifique el precio.
+* Solo los administradores pueden eliminar reportes.
 
 ---
 
-## 10. Tecnologías a utilizar
+# 10. Tecnologías a utilizar
 
-El equipo debe indicar las tecnologías que usará.
-
-**Ejemplo:**
+## Backend
 
 * Node.js
 * Express.js
+
+## Base de Datos
+
 * MongoDB
 * Mongoose
-* JWT para autenticación
-* Postman para pruebas
-* GitHub para control de versiones
-* Swagger/OpenAPI para documentación, si corresponde
+
+## Seguridad
+
+* JWT (JSON Web Token)
+* bcrypt
+
+## Documentación
+
+* Swagger/OpenAPI
+
+## Testing
+
+* Jest
+* Supertest
+
+## APIs Externas
+
+* OpenStreetMap Nominatim API
+* OpenRouteService API
+
+## Herramientas
+
+* Postman
+* GitHub
+* GitHub Actions
+
+## Despliegue
+
+* Render
+* MongoDB Atlas
 
 ---
 
-## 11. Alcance del proyecto
+# 11. Alcance del proyecto
 
-El equipo debe aclarar qué incluirá y qué no incluirá su proyecto.
+## Incluye
 
-### Incluye:
+* Registro e inicio de sesión.
+* Autenticación mediante JWT.
+* Autorización basada en roles.
+* CRUD de puntos de venta.
+* CRUD de inventarios.
+* Gestión de reportes.
+* Consulta de puntos de venta cercanos.
+* Historial de precios.
+* Estadísticas básicas.
+* Integración con APIs externas de geolocalización.
+* Documentación Swagger.
+* Pruebas unitarias.
+* Despliegue público de la API.
 
-* CRUD de productos
-* Registro e inicio de sesión
-* Gestión de pedidos
-* Validación de datos
-* Conexión con MongoDB
+## No incluye
 
-### No incluye:
-
-* Pasarela de pagos real
-* Aplicación móvil
-* Panel visual avanzado
-* Envío real de correos electrónicos
-
----
+* Aplicación móvil.
+* Pagos en línea.
+* Compra directa de productos.
+* Notificaciones SMS.
+* Integración con sistemas gubernamentales reales.
+* Actualización automática de inventarios desde EMAPA.
