@@ -30,7 +30,7 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 
 * Gestionar usuarios.
 * Aprobar puntos de venta.
-* Eliminar reportes falsos.
+* Gestionar reportes.
 * Consultar estadísticas del sistema.
 * Gestionar inventarios globales.
 
@@ -47,7 +47,6 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 * Consultar disponibilidad de pollo.
 * Buscar puntos de venta cercanos.
 * Filtrar resultados por precio.
-* Reportar información incorrecta.
 * Consultar historial de precios.
 
 ---
@@ -62,7 +61,7 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 
 4. Como consumidor, quiero buscar puntos de venta cercanos a mi ubicación para reducir el tiempo de traslado.
 
-5. Como consumidor, quiero reportar información incorrecta para mejorar la calidad de los datos publicados.
+5. Como vendedor, quiero consultar el historial de cambios de precios de mis productos, para analizar la evolución de los precios a lo largo del tiempo.
 
 6. Como vendedor, quiero registrar un nuevo punto de venta para ofrecer información sobre mi disponibilidad.
 
@@ -84,7 +83,6 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 | Visualizar precios              | Consulta de precios       |
 | Consultar stock disponible      | Gestión de inventario     |
 | Buscar puntos cercanos          | Geolocalización           |
-| Reportar información incorrecta | Sistema de reportes       |
 | Registrar punto de venta        | Crear punto de venta      |
 | Actualizar stock                | Modificar inventario      |
 | Actualizar precio               | Modificar precio          |
@@ -117,19 +115,10 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 ## Inventario
 
 * puntoVenta
-* cantidadDisponibleKg
+* cantidadDisponible
 * precioPorKg
 * estado
 * fechaActualizacion
-
-## Reporte
-
-* usuario
-* puntoVenta
-* motivo
-* descripción
-* fechaReporte
-* estado
 
 ## HistorialPrecio
 
@@ -177,13 +166,6 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 | POST   | /api/inventory           | Registrar inventario     |
 | PATCH  | /api/inventory/:id       | Actualizar inventario    |
 
-## Reportes
-
-| Método | Endpoint     | Descripción     |
-| ------ | ------------ | --------------- |
-| POST   | /api/reports | Crear reporte   |
-| GET    | /api/reports | Listar reportes |
-
 ## Estadísticas
 
 | Método | Endpoint                     | Descripción                    |
@@ -200,11 +182,9 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 * El stock disponible no puede ser negativo.
 * Solo los vendedores pueden actualizar inventarios.
 * Solo los administradores pueden aprobar puntos de venta.
-* Solo los usuarios autenticados pueden generar reportes.
 * No se puede registrar un inventario sin asociarlo a un punto de venta.
-* Los puntos de venta móviles deben registrar una ubicación válida.
+* Los puntos de venta móviles deben registrar una ubicación.
 * El historial de precios debe almacenarse cada vez que se modifique el precio.
-* Solo los administradores pueden eliminar reportes.
 
 ---
 
@@ -231,7 +211,7 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 
 ## Testing
 
-* Jest
+* Vitest
 * Supertest
 
 ## APIs Externas
@@ -247,7 +227,7 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 
 ## Despliegue
 
-* Render
+* Vercel
 * MongoDB Atlas
 
 ---
@@ -261,7 +241,6 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 * Autorización basada en roles.
 * CRUD de puntos de venta.
 * CRUD de inventarios.
-* Gestión de reportes.
 * Consulta de puntos de venta cercanos.
 * Historial de precios.
 * Estadísticas básicas.
@@ -272,7 +251,7 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 
 ## No incluye
 
-* Aplicación móvil.
+* Frontend.
 * Pagos en línea.
 * Compra directa de productos.
 * Notificaciones SMS.
