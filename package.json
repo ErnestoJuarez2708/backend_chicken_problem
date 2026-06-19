@@ -1,0 +1,30 @@
+{
+  "name": "backend_chicken_problem",
+  "version": "1.0.0",
+  "description": "**DondeEstaMiPolloAPI**",
+  "main": "index.js",
+  "scripts": {
+    "dev": "node --watch src/app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ErnestoJuarez2708/backend_chicken_problem.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "module",
+  "bugs": {
+    "url": "https://github.com/ErnestoJuarez2708/backend_chicken_problem/issues"
+  },
+  "homepage": "https://github.com/ErnestoJuarez2708/backend_chicken_problem#readme",
+  "dependencies": {
+    "dotenv": "^17.4.2",
+    "express": "^5.2.1",
+    "express-openapi-validator": "^5.6.2",
+    "mongoose": "^9.7.1",
+    "swagger-ui-express": "^5.0.1",
+    "yamljs": "^0.3.0"
+  }
+}
