@@ -1,5 +1,7 @@
+import mongoose from "mongoose";
+
 export function validatePointSellBody(body, isComplete) {
-  const validProperties = ["name", "type", "direction", "latitude", "longitude", "state"];
+  const validProperties = ["name", "type", "direction", "latitude", "longitude", "state", "owner"];
 
   if (!body) {
     return {
@@ -32,6 +34,18 @@ export function validatePointSellBody(body, isComplete) {
 }
 
 function validateBodyCorrectness(body, validPropertiesInBody) {
+  const validProperties = ["name", "type", "direction", "latitude", "longitude", "state", "owner"];
+
+  // Check for invalid properties in body
+  for (let property of Object.keys(body)) {
+    if (!validProperties.includes(property)) {
+      return {
+        validation: false,
+        message: `Body has a non-allowed property called ${property} for point sell`
+      };
+    }
+  }
+
   let validationResult = null;
 
   for (let property of validPropertiesInBody) {
@@ -64,6 +78,11 @@ function validateBodyCorrectness(body, validPropertiesInBody) {
 
       case "state":
         validationResult = validateState(body.state);
+        if (!validationResult.validation) return validationResult;
+        break;
+
+      case "owner":
+        validationResult = validateOwner(body.owner);
         if (!validationResult.validation) return validationResult;
         break;
 
@@ -198,5 +217,26 @@ function validateState(state) {
   return {
     validation: true,
     message: "State is valid"
+  };
+}
+
+function validateOwner(owner) {
+  if (typeof owner !== "string" || owner.trim().length === 0) {
+    return {
+      validation: false,
+      message: "Owner must be a non-empty string"
+    };
+  }
+
+  if (!mongoose.Types.ObjectId.isValid(owner)) {
+    return {
+      validation: false,
+      message: "Owner must be a valid MongoDB ObjectId (24 hex characters)"
+    };
+  }
+
+  return {
+    validation: true,
+    message: "Owner is valid"
   };
 }

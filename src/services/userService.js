@@ -1,4 +1,4 @@
-
+import { User } from "../data/user.js";
 
 export const getUsersService = async (roles, active) => {
     try {

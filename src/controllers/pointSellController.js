@@ -67,7 +67,7 @@ export async function savePointSell(req, res, next) {
       latitude: req.body.latitude,
       longitude: req.body.longitude,
       state: req.body.state || "PENDIENTE",
-      owner: req.body.owner
+      owner: req.body.owner || req.user.id
     });
 
     return res.success(201, "Point of sale created successfully", newPointSell);

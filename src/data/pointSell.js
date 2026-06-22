@@ -1,5 +1,4 @@
 import mongoose from "mongoose";
-//TODO: Importar User y ponerlo en owner: User
 
 const pointSellSchema = new mongoose.Schema({
     name: String,
@@ -16,8 +15,11 @@ const pointSellSchema = new mongoose.Schema({
       enum: ["ACTIVO", "INACTIVO", "PENDIENTE"],
       default: "PENDIENTE"
     },
-    owner: String,
-    updatedAt: Date
-});
+    owner: { 
+    type: mongoose.Schema.Types.ObjectId, 
+    ref: "BUYER", 
+    required: true 
+    }
+}, { timestamps: true });
 
 export const PointSell = mongoose.model("PointSell", pointSellSchema);

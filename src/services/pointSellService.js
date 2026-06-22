@@ -16,7 +16,11 @@ export async function createPointSell(pointSellData) {
 }
 
 export async function replacePointSellById(id, replacementData) {
-  const replacedPointSell = await PointSell.findByIdAndUpdate(id);
+  const replacedPointSell = await PointSell.findByIdAndUpdate(
+    id,
+    replacementData,
+    { new: true, runValidators: true }
+  );
   return replacedPointSell;
 }
 
