@@ -1,18 +1,18 @@
 import { Inventory } from "../data/inventory.js";
 
 export async function getAllInventories() {
-  const inventories = await Inventory.find().populate('pointSell');
+  const inventories = await Inventory.find();
   return inventories;
 }
 
 export async function getAvailableInventories() {
-  const inventories = await Inventory.find({ estado: 'DISPONIBLE' }).populate('pointSell');
+  const inventories = await Inventory.find({ estado: 'DISPONIBLE' });
   return inventories;
 }
 
 export async function createInventory(inventoryData) {
   const newInventory = await Inventory.create(inventoryData);
-  return await newInventory.populate('pointSell');
+  return newInventory;
 }
 
 export async function updateInventoryById(id, updateData) {
@@ -20,7 +20,7 @@ export async function updateInventoryById(id, updateData) {
     id,
     { ...updateData, fechaActualizacion: new Date() },
     { new: true }
-  ).populate('pointSell');
+  );
   return updatedInventory;
 }
 
