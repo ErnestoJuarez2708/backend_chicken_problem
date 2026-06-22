@@ -8,6 +8,7 @@ import pointSellRoutes from "./routes/pointSellRoutes.js";
 import { connectToMongoDB } from "./data/mongoConnection.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
+import inventoryRoutes from "./routes/inventoryRoutes.js";
 
 dotenv.config();
 
@@ -17,7 +18,7 @@ const app = express();
 
 await connectToMongoDB();
 
-const openApiDocument = YAML.load("./src/docs/api.yaml");
+const openApiDocument = YAML.load("./docs/api.yaml");
 
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(openApiDocument));
 
@@ -28,7 +29,7 @@ app.use(responseFormatter);
 app.use("/api/sales-points", pointSellRoutes);
 
 app.use(OpenApiValidator.middleware({
-  apiSpec: "./src/docs/api.yaml",
+  apiSpec: "./docs/api.yaml",
   validateRequests: true,
   validateResponses: false,
 }));
@@ -36,6 +37,8 @@ app.use(OpenApiValidator.middleware({
 app.use("/api/auth", authRoutes);
 
 app.use("/api/users", userRoutes);
+
+app.use("/api/inventory", inventoryRoutes);
 
 app.use(errorHandler);
 

@@ -1,12 +1,19 @@
 import mongoose from "mongoose";
-import { PointSell } from "./pointSell.js";
 
 const inventorySchema = new mongoose.Schema({
-    pointSell: PointSell,
-    quantityAvailable: Number,
-    priceByKG: Number,
-    state: String,
-    updateAt: Date
-});
+  pointSell: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'PointSell',
+    required: true
+  },
+  cantidadDisponible: Number,
+  precioPorKg: Number,
+  estado: {
+    type: String,
+    enum: ['DISPONIBLE', 'AGOTADO'],
+    default: 'DISPONIBLE'
+  },
+  fechaActualizacion: Date
+}, { timestamps: true });
 
-export const Inventory = mongoose.model("Inventory", inventorySchema);
+export const Inventory = mongoose.model('Inventory', inventorySchema);

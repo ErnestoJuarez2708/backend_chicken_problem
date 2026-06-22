@@ -1,0 +1,704 @@
+openapi: 3.0.3
+
+info:
+  title: Chicken Problem API
+  version: 1.0.0
+  description: API para gestionar puntos de venta de pollo, usuarios y autenticación
+
+servers:
+  - url: http://localhost:3000
+    description: Servidor local
+  - url: https://chicken-api.onrender.com
+    description: Servidor en producción
+
+paths:
+  /api/sales-points:
+    get:
+      summary: Obtener todos los puntos de venta
+      tags:
+        - Sales Points
+      parameters:
+        - name: type
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [FIJO, MOVIL]
+          example: "FIJO"
+        - name: state
+          in: query
+          required: false
+          schema:
+            type: string
+            enum: [ACTIVO, INACTIVO, PENDIENTE]
+          example: "ACTIVO"
+        - name: owner
+          in: query
+          required: false
+          schema:
+            type: string
+          example: "userId123"
+      responses:
+        '200':
+          description: Lista de puntos de venta obtenida correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PointsSellListResponse'
+
+    post:
+      summary: Crear un nuevo punto de venta
+      tags:
+        - Sales Points
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreatePointSellInput'
+      responses:
+        '201':
+          description: Punto de venta creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PointSellResponse'
+        '400':
+          description: Datos inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/sales-points/{id}:
+    get:
+      summary: Obtener un punto de venta por ID
+      tags:
+        - Sales Points
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del punto de venta
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Punto de venta encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PointSellResponse'
+        '404':
+          description: Punto de venta no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    put:
+      summary: Actualizar un punto de venta
+      tags:
+        - Sales Points
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del punto de venta
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdatePointSellInput'
+      responses:
+        '200':
+          description: Punto de venta actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PointSellResponse'
+        '400':
+          description: Datos inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Punto de venta no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    delete:
+      summary: Eliminar un punto de venta
+      tags:
+        - Sales Points
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del punto de venta
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Punto de venta eliminado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PointSellResponse'
+        '404':
+          description: Punto de venta no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/auth/register:
+    post:
+      summary: Register user
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RegisterUserInput'
+      responses:
+        '201':
+          description: User registered successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuthSuccessResponse'
+        '400':
+          description: Invalid request data
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/auth/login:
+    post:
+      summary: Login user
+      tags:
+        - Auth
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LoginUserInput'
+      responses:
+         '200':
+           description: User logged in successfully
+           content:
+             application/json:
+               schema:
+                 $ref: '#/components/schemas/AuthSuccessResponse'
+         '401':
+           description: Unauthorized
+           content:
+             application/json:
+               schema:
+                 $ref: '#/components/schemas/ErrorResponse'
+
+  /api/inventory:
+    get:
+      summary: Obtener todos los inventarios
+      tags:
+        - Inventory
+      responses:
+        '200':
+          description: Lista de inventarios obtenida correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryListResponse'
+        '500':
+          description: Error del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+    post:
+      summary: Crear un nuevo inventario
+      tags:
+        - Inventory
+      security:
+        - bearerAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateInventoryInput'
+      responses:
+        '201':
+          description: Inventario creado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryResponse'
+        '400':
+          description: Datos inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '401':
+          description: No autorizado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/inventory/{id}:
+    patch:
+      summary: Actualizar un inventario
+      tags:
+        - Inventory
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID del inventario
+          schema:
+            type: string
+            example: "6a39a14a3d6ba4ab36a0f0e0"
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/UpdateInventoryInput'
+      responses:
+        '200':
+          description: Inventario actualizado exitosamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryResponse'
+        '400':
+          description: Datos inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+        '404':
+          description: Inventario no encontrado
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/inventory/available:
+    get:
+      summary: Obtener inventarios disponibles
+      tags:
+        - Inventory
+      responses:
+        '200':
+          description: Lista de inventarios disponibles
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryListResponse'
+
+  /api/inventory/nearby:
+    get:
+      summary: Buscar inventarios cercanos
+      tags:
+        - Inventory
+      parameters:
+        - name: lat
+          in: query
+          required: true
+          description: Latitud
+          schema:
+            type: number
+            minimum: -90
+            maximum: 90
+          example: -16.5023
+        - name: lon
+          in: query
+          required: true
+          description: Longitud
+          schema:
+            type: number
+            minimum: -180
+            maximum: 180
+          example: -68.1495
+        - name: distance
+          in: query
+          required: false
+          description: Distancia máxima en metros (default 5000)
+          schema:
+            type: number
+            minimum: 0
+          example: 5000
+      responses:
+        '200':
+          description: Lista de inventarios cercanos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/InventoryListResponse'
+        '400':
+          description: Parámetros inválidos
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+  schemas:
+    PointSell:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: "6848d89a5f3e8c4a12345678"
+        name:
+          type: string
+          example: "Pollo Grill Express"
+        type:
+          type: string
+          enum: [FIJO, MOVIL]
+          example: "FIJO"
+        direction:
+          type: string
+          example: "Calle Principal 123, La Paz"
+        latitude:
+          type: number
+          example: -16.5023
+        longitude:
+          type: number
+          example: -68.1495
+        state:
+          type: string
+          enum: [ACTIVO, INACTIVO, PENDIENTE]
+          example: "ACTIVO"
+        owner:
+          type: string
+          example: "ownerId789"
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    CreatePointSellInput:
+      type: object
+      required:
+        - name
+        - type
+        - direction
+        - latitude
+        - longitude
+      properties:
+        name:
+          type: string
+          minLength: 3
+          maxLength: 100
+          example: "Pollo Grill Express"
+        type:
+          type: string
+          enum: [FIJO, MOVIL]
+          example: "FIJO"
+        direction:
+          type: string
+          minLength: 5
+          maxLength: 200
+          example: "Calle Principal 123, La Paz"
+        latitude:
+          type: number
+          minimum: -90
+          maximum: 90
+          example: -16.5023
+        longitude:
+          type: number
+          minimum: -180
+          maximum: 180
+          example: -68.1495
+        owner:
+          type: string
+          example: "ownerId789"
+          description: "Optional. If not provided, the authenticated user's ID will be used"
+
+    UpdatePointSellInput:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 3
+          maxLength: 100
+          example: "Pollo Grill Premium"
+        type:
+          type: string
+          enum: [FIJO, MOVIL]
+          example: "MOVIL"
+        direction:
+          type: string
+          minLength: 5
+          maxLength: 200
+          example: "Calle Secundaria 456, La Paz"
+        latitude:
+          type: number
+          minimum: -90
+          maximum: 90
+          example: -16.5100
+        longitude:
+          type: number
+          minimum: -180
+          maximum: 180
+          example: -68.1500
+        state:
+          type: string
+          enum: [ACTIVO, INACTIVO, PENDIENTE]
+          example: "INACTIVO"
+
+    PointSellResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "Point of sale created successfully"
+        data:
+          $ref: '#/components/schemas/PointSell'
+
+    PointsSellListResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "Points of sale retrieved successfully"
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/PointSell'
+
+    RegisterUserInput:
+      type: object
+      required:
+        - name
+        - email
+        - password
+        - role
+      properties:
+        name:
+          type: string
+          example: Zein Tonconi
+        email:
+          type: string
+          format: email
+          example: zein.tonconi1@gmail.com
+        password:
+          type: string
+          format: password
+          example: "12345678"
+        role:
+          type: string
+          example: ADMIN
+          enum:
+            - ADMIN
+            - BUYER
+            - SELLER
+
+    LoginUserInput:
+      type: object
+      required:
+        - email
+        - password
+      properties:
+        email:
+          type: string
+          format: email
+          example: zein.tonconi1@gmail.com
+        password:
+          type: string
+          format: password
+          example: "12345678"
+
+    AuthData:
+      type: object
+      required:
+        - name
+        - token
+      properties:
+        name:
+          type: string
+          example: Zein Tonconi
+        token:
+          type: string
+          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+
+    AuthSuccessResponse:
+      type: object
+      required:
+        - success
+        - message
+        - data
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: User registered successfully
+        data:
+          $ref: '#/components/schemas/AuthData'
+
+    ErrorResponse:
+       type: object
+       required:
+         - success
+         - message
+       properties:
+         success:
+           type: boolean
+           example: false
+         message:
+           type: string
+           example: Invalid credentials
+
+    Inventory:
+      type: object
+      properties:
+        _id:
+          type: string
+          example: "6848d89a5f3e8c4a12345679"
+        pointSell:
+          type: object
+          example:
+            _id: "6848d89a5f3e8c4a12345678"
+            name: "Pollo Grill Express"
+        cantidadDisponible:
+          type: number
+          minimum: 0
+          example: 100
+        precioPorKg:
+          type: number
+          minimum: 0
+          example: 15.50
+        estado:
+          type: string
+          enum: [DISPONIBLE, AGOTADO, FUERA_SERVICIO]
+          example: "DISPONIBLE"
+        fechaActualizacion:
+          type: string
+          format: date-time
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    CreateInventoryInput:
+      type: object
+      required:
+        - pointSell
+        - cantidadDisponible
+        - precioPorKg
+      properties:
+        pointSell:
+          type: string
+          description: ID del punto de venta
+          example: "6848d89a5f3e8c4a12345678"
+        cantidadDisponible:
+          type: number
+          minimum: 0
+          example: 100
+        precioPorKg:
+          type: number
+          minimum: 0.01
+          example: 15.50
+        estado:
+          type: string
+          enum: [DISPONIBLE, AGOTADO, FUERA_SERVICIO]
+          default: "DISPONIBLE"
+          example: "DISPONIBLE"
+
+    UpdateInventoryInput:
+      type: object
+      properties:
+        cantidadDisponible:
+          type: number
+          minimum: 0
+          example: 50
+        precioPorKg:
+          type: number
+          minimum: 0.01
+          example: 12.00
+        estado:
+          type: string
+          enum: [DISPONIBLE, AGOTADO, FUERA_SERVICIO]
+          example: "DISPONIBLE"
+
+    InventoryResponse:
+      type: object
+      required:
+        - success
+        - message
+        - data
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "Inventory created successfully"
+        data:
+          $ref: '#/components/schemas/Inventory'
+
+    InventoryListResponse:
+      type: object
+      required:
+        - success
+        - message
+        - data
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: "Inventories retrieved successfully"
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Inventory'
