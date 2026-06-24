@@ -151,7 +151,8 @@ export async function nearestPointSell(req, res, next) {
     }
 
     const result = await getNearestPointsell({ lat, long });
-    return res.json(result);
+
+    return res.success(200, "Succesfully retrieve the nearest sellpoints", result)
   } catch (error) {
     next(error);
   }
