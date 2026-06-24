@@ -1,5 +1,3 @@
-
-
 import { existUserByEmail, loginService, registerService } from "../services/authService.js";
 import { errorBuilder } from "../utils/errorBuilder.js";
 
