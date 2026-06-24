@@ -9,7 +9,8 @@ import {
   findPointSellById,
   savePointSell,
   replacePointSell,
-  deletePointSell
+  deletePointSell,
+  nearestPointSell
 } from "../controllers/pointSellController.js";
 
 const pointSellRoutes = Router();
@@ -37,6 +38,13 @@ pointSellRoutes.delete(
   authorizationMiddleware(["ADMIN"]),
   deletePointSell
 );
+
+pointSellRoutes.get(
+  '/near-me',
+  authenticationMiddleware,
+  authorizationMiddleware(["BUYER"]),
+  nearestPointSell
+)
 
 export default pointSellRoutes;
 

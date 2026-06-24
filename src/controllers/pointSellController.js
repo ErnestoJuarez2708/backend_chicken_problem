@@ -6,7 +6,8 @@ import {
   deletePointSellById,
   getPointsSellByType,
   getPointsSellByState,
-  getPointsSellByOwner
+  getPointsSellByOwner,
+  getNearestPointsell
 } from "../services/pointSellService.js";
 
 import { validatePointSellBody } from "../utils/pointSellValidator.js";
@@ -138,5 +139,14 @@ export async function deletePointSell(req, res, next) {
   } catch (error) {
     error.statusCode = 500;
     return next(error);
+  }
+}
+
+export async function nearestPointSell(req,res,next){
+  const {lat, long} = req.params
+  try {
+    return await getNearestPointsell({lat,long})
+  } catch (error) {
+    next(error)
   }
 }
