@@ -1,7 +1,7 @@
 
 import { Router } from "express";
-import { getAvailabilityStatistics, getPriceStatistics } from "../controllers/statisticsController";
-import { authenticationMiddleware, authorizationMiddleware } from "../middlewares/authenticationMiddleware";
+import { getAvailabilityStatistics, getPriceStatistics } from "../controllers/statisticsController.js";
+import { authenticationMiddleware, authorizationMiddleware } from "../middlewares/authenticationMiddleware.js";
 
 
 const router = Router();

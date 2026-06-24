@@ -1,7 +1,7 @@
 import {
     getPriceStatisticsService,
     getAvailabilityStatisticsService
-} from "../services/statistics.service.js";
+} from "../services/statisticsService.js";
 
 export const getPriceStatistics = async (req, res, next) => {
     try {
