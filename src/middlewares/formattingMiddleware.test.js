@@ -3,7 +3,7 @@ import { describe, it, expect, beforeEach, vi } from "vitest";
 import {
     errorHandler,
     responseFormatter
-} from "./formattingMiddleware.js";
+} from "./formatingMiddleware.js";
 
 describe("Formatting Middleware", () => {
 

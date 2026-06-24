@@ -120,13 +120,6 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 * estado
 * fechaActualizacion
 
-## HistorialPrecio
-
-* puntoVenta
-* precioAnterior
-* precioNuevo
-* fechaCambio
-
 ---
 
 # 8. Endpoints tentativos de la API
@@ -148,13 +141,14 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 
 ## Puntos de Venta
 
-| Método | Endpoint              | Descripción               |
-| ------ | --------------------- | ------------------------- |
-| GET    | /api/sales-points     | Listar puntos de venta    |
-| GET    | /api/sales-points/:id | Obtener punto de venta    |
-| POST   | /api/sales-points     | Crear punto de venta      |
-| PUT    | /api/sales-points/:id | Actualizar punto de venta |
-| DELETE | /api/sales-points/:id | Eliminar punto de venta   |
+| Método | Endpoint                   | Descripción                          |
+| ------ | -------------------------- | ------------------------------------ |
+| GET    | /api/sales-points          | Listar puntos de venta               |
+| GET    | /api/sales-points/:id      | Obtener punto de venta               |
+| GET    | /api/sales-points//near-me | Buscar el punto de venta más cercano |
+| POST   | /api/sales-points          | Crear punto de venta                 |
+| PUT    | /api/sales-points/:id      | Actualizar punto de venta            |
+| DELETE | /api/sales-points/:id      | Eliminar punto de venta              |
 
 ## Inventario
 
@@ -216,7 +210,6 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 
 ## APIs Externas
 
-* OpenStreetMap Nominatim API
 * OpenRouteService API
 
 ## Herramientas
@@ -227,7 +220,7 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 
 ## Despliegue
 
-* Vercel
+* Render
 * MongoDB Atlas
 
 ---
