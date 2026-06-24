@@ -9,6 +9,7 @@ import { connectToMongoDB } from "./data/mongoConnection.js";
 import authRoutes from "./routes/authRoutes.js";
 import userRoutes from "./routes/userRoutes.js";
 import inventoryRoutes from "./routes/inventoryRoutes.js";
+import statisticRoutes from "./routes/statisticsRoutes.js"
 
 dotenv.config();
 
@@ -39,6 +40,8 @@ app.use("/api/auth", authRoutes);
 app.use("/api/users", userRoutes);
 
 app.use("/api/inventory", inventoryRoutes);
+
+app.use("/api/statistics", statisticRoutes);
 
 app.use(errorHandler);
 

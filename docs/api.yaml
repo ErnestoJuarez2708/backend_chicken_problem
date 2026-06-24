@@ -370,6 +370,43 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/ErrorResponse'
+  /api/statistics/prices:
+    get:
+      summary: Obtener estadísticas de precios
+      tags:
+        - Statistics
+      responses:
+        '200':
+          description: Estadísticas de precios obtenidas correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PriceStatisticsResponse'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'
+
+  /api/statistics/availability:
+    get:
+      summary: Obtener estadísticas de disponibilidad
+      tags:
+        - Statistics
+      responses:
+        '200':
+          description: Estadísticas de disponibilidad obtenidas correctamente
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AvailabilityStatisticsResponse'
+        '500':
+          description: Error interno del servidor
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorResponse'                
 
 components:
   securitySchemes:
@@ -702,3 +739,67 @@ components:
           type: array
           items:
             $ref: '#/components/schemas/Inventory'
+
+        PriceStatistics:
+      type: object
+      properties:
+        averagePrice:
+          type: number
+          example: 18.75
+        minPrice:
+          type: number
+          example: 15.00
+        maxPrice:
+          type: number
+          example: 25.00
+        totalRecords:
+          type: integer
+          example: 42
+
+    PriceStatisticsResponse:
+      type: object
+      required:
+        - success
+        - message
+        - data
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Price statistics retrieved successfully
+        data:
+          $ref: '#/components/schemas/PriceStatistics'
+          
+    AvailabilityStatistics:
+      type: object
+      properties:
+        totalPoints:
+          type: integer
+          example: 50
+        availablePoints:
+          type: integer
+          example: 35
+        outOfStockPoints:
+          type: integer
+          example: 15
+        availabilityPercentage:
+          type: number
+          example: 70.00
+
+    AvailabilityStatisticsResponse:
+      type: object
+      required:
+        - success
+        - message
+        - data
+      properties:
+        success:
+          type: boolean
+          example: true
+        message:
+          type: string
+          example: Availability statistics retrieved successfully
+        data:
+          $ref: '#/components/schemas/AvailabilityStatistics'
