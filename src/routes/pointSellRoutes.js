@@ -20,19 +20,17 @@ pointSellRoutes.get("/:id", findPointSellById);
 pointSellRoutes.post(
   "/",
   authenticationMiddleware,
-  authorizationMiddleware(["VENDEDOR", "ADMIN"]),
+  authorizationMiddleware(["SELLER", "ADMIN"]),
   savePointSell
 );
 
-// PUT - Requiere autenticación (Vendedor o Admin)
 pointSellRoutes.put(
   "/:id",
   authenticationMiddleware,
-  authorizationMiddleware(["VENDEDOR", "ADMIN"]),
+  authorizationMiddleware(["SELLER", "ADMIN"]),
   replacePointSell
 );
 
-// DELETE - Requiere autenticación (Admin)
 pointSellRoutes.delete(
   "/:id",
   authenticationMiddleware,
