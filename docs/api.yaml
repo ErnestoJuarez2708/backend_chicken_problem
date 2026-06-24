@@ -424,6 +424,8 @@ paths:
       summary: Obtener estadísticas de precios
       tags:
         - Statistics
+      security:
+        - bearerAuth: []
       responses:
         '200':
           description: Estadísticas de precios obtenidas correctamente
@@ -443,6 +445,8 @@ paths:
       summary: Obtener estadísticas de disponibilidad
       tags:
         - Statistics
+      security:
+        - bearerAuth: []
       responses:
         '200':
           description: Estadísticas de disponibilidad obtenidas correctamente
@@ -789,7 +793,7 @@ components:
           items:
             $ref: '#/components/schemas/Inventory'
 
-        PriceStatistics:
+    PriceStatistics:
       type: object
       properties:
         averagePrice:

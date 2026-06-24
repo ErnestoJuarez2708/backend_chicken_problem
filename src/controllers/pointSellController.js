@@ -142,11 +142,17 @@ export async function deletePointSell(req, res, next) {
   }
 }
 
-export async function nearestPointSell(req,res,next){
-  const {lat, long} = req.params
+export async function nearestPointSell(req, res, next) {
   try {
-    return await getNearestPointsell({lat,long})
+    const { lat, long } = req.query;
+
+    if (!lat || !long) {
+      return res.status(400).json({ error: "Se requieren lat y long" });
+    }
+
+    const result = await getNearestPointsell({ lat, long });
+    return res.json(result);
   } catch (error) {
-    next(error)
+    next(error);
   }
 }

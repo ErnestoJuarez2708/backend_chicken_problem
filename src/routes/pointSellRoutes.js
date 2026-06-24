@@ -15,6 +15,8 @@ import {
 
 const pointSellRoutes = Router();
 
+pointSellRoutes.get('/near-me', nearestPointSell);
+
 pointSellRoutes.get("/", findPointsSell);
 pointSellRoutes.get("/:id", findPointSellById);
 
@@ -38,13 +40,6 @@ pointSellRoutes.delete(
   authorizationMiddleware(["ADMIN"]),
   deletePointSell
 );
-
-pointSellRoutes.get(
-  '/near-me',
-  authenticationMiddleware,
-  authorizationMiddleware(["BUYER"]),
-  nearestPointSell
-)
 
 export default pointSellRoutes;
 
