@@ -44,9 +44,11 @@ export async function getPointsSellByOwner(ownerId) {
   return pointsSell;
 }
 
-const ORS_API_KEY = process.env.OPENROUTE_API_KEY;
 
 export async function getNearestPointsell({ lat, long }) {
+
+  const ORS_API_KEY = process.env.ORS_API_KEY;
+
   const pointsSell = await PointSell.find();
 
   const routes = await Promise.all(

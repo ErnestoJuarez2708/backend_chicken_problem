@@ -6,10 +6,14 @@ import { authenticationMiddleware, authorizationMiddleware } from "../middleware
 
 const router = Router();
 
-router.use(authenticationMiddleware, authorizationMiddleware(["ADMIN"]));
+router.get('/prices', 
+    authenticationMiddleware, 
+    authorizationMiddleware(["ADMIN"]), 
+    getPriceStatistics)
 
-router.get('/prices', getPriceStatistics)
-
-router.get('/availability', getAvailabilityStatistics)
+router.get('/availability', 
+    authenticationMiddleware, 
+    authorizationMiddleware(["ADMIN"]),
+    getAvailabilityStatistics)
 
 export default router
