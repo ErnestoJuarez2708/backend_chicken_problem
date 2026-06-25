@@ -303,7 +303,7 @@ https://chicken-api.onrender.com
 ![Inicio de sesión vendedor](capturas/loginS.png)
 ![Inicio de sesión admin](capturas/loginA.png)
 
-**Modificar a un usuario **
+**Modificar a un usuario**
 ![Actualizar un usuario](capturas/updateUser.png)
  
 ## 15.2. Puntos de Venta
