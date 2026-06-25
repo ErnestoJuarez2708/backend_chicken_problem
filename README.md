@@ -120,13 +120,6 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 * estado
 * fechaActualizacion
 
-## HistorialPrecio
-
-* puntoVenta
-* precioAnterior
-* precioNuevo
-* fechaCambio
-
 ---
 
 # 8. Endpoints tentativos de la API
@@ -148,13 +141,14 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 
 ## Puntos de Venta
 
-| Método | Endpoint              | Descripción               |
-| ------ | --------------------- | ------------------------- |
-| GET    | /api/sales-points     | Listar puntos de venta    |
-| GET    | /api/sales-points/:id | Obtener punto de venta    |
-| POST   | /api/sales-points     | Crear punto de venta      |
-| PUT    | /api/sales-points/:id | Actualizar punto de venta |
-| DELETE | /api/sales-points/:id | Eliminar punto de venta   |
+| Método | Endpoint                   | Descripción                          |
+| ------ | -------------------------- | ------------------------------------ |
+| GET    | /api/sales-points          | Listar puntos de venta               |
+| GET    | /api/sales-points/:id      | Obtener punto de venta               |
+| GET    | /api/sales-points//near-me | Buscar el punto de venta más cercano |
+| POST   | /api/sales-points          | Crear punto de venta                 |
+| PUT    | /api/sales-points/:id      | Actualizar punto de venta            |
+| DELETE | /api/sales-points/:id      | Eliminar punto de venta              |
 
 ## Inventario
 
@@ -216,7 +210,6 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 
 ## APIs Externas
 
-* OpenStreetMap Nominatim API
 * OpenRouteService API
 
 ## Herramientas
@@ -227,12 +220,48 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 
 ## Despliegue
 
-* Vercel
+* Render
 * MongoDB Atlas
 
 ---
 
-# 11. Alcance del proyecto
+# 11. Instalación y ejecución en entorno local
+
+```bash
+# 1. Clonar el repositorio
+git clone https://github.com/ErnestoJuarez2708/backend_chicken_problem.git
+
+# 2. Instalar dependencias
+npm install
+ 
+# 3. Crear el archivo .env (ver sección siguiente)
+ 
+# 4. Levantar el servidor en modo desarrollo
+npm run dev
+
+# Una vez configurado, se mostrará en consola un mensaje de que el servidor está corriendo en el puerto especificado.
+# La API quedará disponible en `http://localhost:3000`.
+```
+
+# 12. Configuración del archivo .env
+
+Crea un archivo `.env` dentro de `SuperChero/` con las siguientes variables:
+ 
+```
+PORT=3000
+MONGODB_URI=tu_uri_de_mongodb
+JWT_SECRET=tu_clave_secreta
+ORS_API_KEY=api_key
+```
+
+# 13. Despliegue
+
+**Link del deploy:**
+https://chicken-api.onrender.com
+
+---
+
+# 14. Alcance del proyecto
 
 ## Incluye
 
@@ -257,3 +286,60 @@ Desarrollar una API REST utilizando Node.js, Express.js y MongoDB que permita ge
 * Notificaciones SMS.
 * Integración con sistemas gubernamentales reales.
 * Actualización automática de inventarios desde EMAPA.
+
+---
+
+# 15. Pruebas con SWAGGER
+
+## 15.1. Autenticación
+ 
+**Registro de usuario**
+ 
+![Registro de usuario](capturas/register.png)
+ 
+**Inicio de sesión (obtención del token)**
+ 
+![Inicio de sesión cliente](capturas/loginB.png)
+![Inicio de sesión vendedor](capturas/loginS.png)
+![Inicio de sesión admin](capturas/loginA.png)
+
+**Modificar a un usuario **
+![Actualizar un usuario](capturas/updateUser.png)
+ 
+## 15.2. Puntos de Venta
+ 
+**Obtener puntos de venta**
+ 
+![Listar Puntos de Venta](capturas/getAllPointSales.png)
+ 
+**Crear punto de Venta (admin)**
+ 
+![Crear un puntos de Venta](capturas/postPointSell.png)
+
+**Actualizar punto de venta**
+ 
+![Actualizar Punto de venta](capturas/updatePointSale.png)
+
+**Obtener 3 puntos de venta segun mi localizacion (Consumo API)**
+ 
+![Punto de venta cercano](capturas/near-me.png)
+ 
+### 3. Inventario
+ 
+**Obtener inventario disponible**
+ 
+![Inventarios disnibles](capturas/inventory.png)
+ 
+**Obtener inventario cerca**
+ 
+![Lugares donde esta el inventario](capturas/inventoryAvaible.png)
+ 
+### 4. Estadisticas
+ 
+**Obtener Estadisticas de precios (admin)**
+ 
+![Obtener estadisticas de precios](capturas/stadistics.png)
+ 
+**Obtener Estadisticas de disponibilidad (admin)**
+ 
+![Obtener estadisticas de disponibilidad](capturas/stadistics2.png)

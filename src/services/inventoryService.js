@@ -25,7 +25,6 @@ export async function updateInventoryById(id, updateData) {
 }
 
 export async function searchNearby(latitude, longitude, maxDistance = 5000) {
-  // busca puntos de venta cercanos con inventario disponible
   const inventories = await Inventory.find({ estado: 'DISPONIBLE' })
     .populate({
       path: 'pointSell',
