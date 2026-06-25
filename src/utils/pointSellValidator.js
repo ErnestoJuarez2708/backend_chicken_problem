@@ -21,13 +21,6 @@ export function validatePointSellBody(body, isComplete) {
         message: "Body has none valid property"
       };
     }
-  } else {
-    if (validPropertiesInBody.length === 0) {
-      return {
-        validation: false,
-        message: "Body has none valid property"
-      };
-    }
   }
 
   return validateBodyCorrectness(body, validPropertiesInBody);
@@ -36,7 +29,6 @@ export function validatePointSellBody(body, isComplete) {
 function validateBodyCorrectness(body, validPropertiesInBody) {
   const validProperties = ["name", "type", "direction", "latitude", "longitude", "state", "owner"];
 
-  // Check for invalid properties in body
   for (let property of Object.keys(body)) {
     if (!validProperties.includes(property)) {
       return {

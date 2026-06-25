@@ -14,7 +14,7 @@ describe('Point Sell Routes', () => {
         r => r.route && r.route.methods.get && r.route.path === '/'
       );
       expect(getRoute).toBeDefined();
-      expect(getRoute.route.stack.length).toBe(1); // just the handler
+      expect(getRoute.route.stack.length).toBe(1);
     });
 
     it('should have GET /:id route registered', () => {
@@ -23,7 +23,7 @@ describe('Point Sell Routes', () => {
         r => r.route && r.route.methods.get && r.route.path === '/:id'
       );
       expect(getByIdRoute).toBeDefined();
-      expect(getByIdRoute.route.stack.length).toBe(1); // just the handler
+      expect(getByIdRoute.route.stack.length).toBe(1); 
     });
 
     it('should have POST / route registered', () => {
@@ -32,7 +32,6 @@ describe('Point Sell Routes', () => {
         r => r.route && r.route.methods.post && r.route.path === '/'
       );
       expect(postRoute).toBeDefined();
-      // POST has middleware + handler
       expect(postRoute.route.stack.length).toBeGreaterThan(1);
     });
 
@@ -42,7 +41,6 @@ describe('Point Sell Routes', () => {
         r => r.route && r.route.methods.put && r.route.path === '/:id'
       );
       expect(putRoute).toBeDefined();
-      // PUT has middleware + handler
       expect(putRoute.route.stack.length).toBeGreaterThan(1);
     });
 
@@ -52,7 +50,6 @@ describe('Point Sell Routes', () => {
         r => r.route && r.route.methods.delete && r.route.path === '/:id'
       );
       expect(deleteRoute).toBeDefined();
-      // DELETE has middleware + handler
       expect(deleteRoute.route.stack.length).toBeGreaterThan(1);
     });
   });
@@ -63,7 +60,6 @@ describe('Point Sell Routes', () => {
       const getRoute = routes.find(
         r => r.route && r.route.methods.get && r.route.path === '/'
       );
-      // Should only have 1 layer (the handler itself)
       expect(getRoute.route.stack.length).toBe(1);
     });
 
@@ -80,7 +76,6 @@ describe('Point Sell Routes', () => {
       const postRoute = routes.find(
         r => r.route && r.route.methods.post && r.route.path === '/'
       );
-      // Should have at least 3 layers: authenticationMiddleware, authorizationMiddleware, handler
       expect(postRoute.route.stack.length).toBeGreaterThanOrEqual(2);
     });
 

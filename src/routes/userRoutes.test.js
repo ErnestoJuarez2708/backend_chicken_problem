@@ -1,7 +1,6 @@
 import { describe, it, expect, vi } from 'vitest';
 import { Router } from 'express';
 
-// Mocks ANTES de importar el router
 vi.mock('../middlewares/authenticationMiddleware.js', () => ({
   authenticationMiddleware: vi.fn((req, res, next) => next()),
   authorizationMiddleware: vi.fn((roles) => (req, res, next) => next())

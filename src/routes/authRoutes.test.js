@@ -2,10 +2,8 @@ import { describe, it, expect, beforeEach, vi } from 'vitest';
 import request from 'supertest';
 import express from 'express';
 
-// Importamos el router
 import authRouter from './authRoutes.js';
 
-// Mocks de los controllers
 vi.mock('../controllers/authController.js');
 
 import { loginController, registerController } from '../controllers/authController.js';
@@ -18,7 +16,7 @@ describe('Auth Routes', () => {
     
     app = express();
     app.use(express.json());
-    app.use('/api/auth', authRouter); // Cambia '/api/auth' si usas otro prefijo en tu app
+    app.use('/api/auth', authRouter);
   });
 
   describe('POST /api/auth/register', () => {
