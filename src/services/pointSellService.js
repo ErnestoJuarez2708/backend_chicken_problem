@@ -106,8 +106,12 @@ export async function getNearestPointsell({ lat, long }) {
       }
     })
   );
-
+  
   return routes
+    .filter((route) => 
+      route.distance !== Number.MAX_SAFE_INTEGER && 
+      route.duration !== Number.MAX_SAFE_INTEGER
+  )
     .sort((a, b) => a.duration - b.duration)
     .slice(0, 3);
 }
