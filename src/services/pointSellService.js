@@ -29,6 +29,11 @@ export async function deletePointSellById(id) {
   return deletedPointSell;
 }
 
+export async function getPointsSellFilter(filter) {
+  const pointsSell = await PointSell.find(filter)
+  return pointsSell
+}
+
 export async function getPointsSellByType(type) {
   const pointsSell = await PointSell.find({ type });
   return pointsSell;

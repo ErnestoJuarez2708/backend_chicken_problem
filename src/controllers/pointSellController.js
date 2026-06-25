@@ -7,7 +7,8 @@ import {
   getPointsSellByType,
   getPointsSellByState,
   getPointsSellByOwner,
-  getNearestPointsell
+  getNearestPointsell,
+  getPointsSellFilter
 } from "../services/pointSellService.js";
 
 import { validatePointSellBody } from "../utils/pointSellValidator.js";
@@ -16,17 +17,13 @@ import { validatePointSellBody } from "../utils/pointSellValidator.js";
 export async function findPointsSell(req, res, next) {
   const { type, state, owner } = req.query;
 
-  let pointsSell;
-
-  if (type) {
-    pointsSell = await getPointsSellByType(type);
-  } else if (state) {
-    pointsSell = await getPointsSellByState(state);
-  } else if (owner) {
-    pointsSell = await getPointsSellByOwner(owner);
-  } else {
-    pointsSell = await getAllPointsSell();
+  const filterOpttions = {
+    ...(type && {type}),
+    ...(state && {state}),
+    ...(owner && {owner})
   }
+
+  const pointsSell = await getPointsSellFilter(filterOpttions)
 
   if (pointsSell.length === 0) {
     return res.success(200, "No points of sale found with the specified criteria", []);
